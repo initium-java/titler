@@ -16,7 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -35,7 +35,7 @@ public class TitlerCont implements Initializable {
 	}
 
 	@FXML
-	public AnchorPane mediaViewPane;
+	public StackPane mediaViewPane;
 
 	@FXML
 	public ScrollPane timelinePane;

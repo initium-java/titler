@@ -10,6 +10,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
@@ -61,13 +62,17 @@
 			<children>
 				<SplitPane dividerPositions="0.75" layoutX="192.0" layoutY="88.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<items>
-						<AnchorPane fx:id="mediaViewPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
 							<children>
-								<MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" layoutX="149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-									<cursor>
-										<Cursor fx:constant="OPEN_HAND" />
-									</cursor>
-								</MediaView>
+                        <StackPane fx:id="mediaViewPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+      								<MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0">
+      									<cursor>
+      										<Cursor fx:constant="OPEN_HAND" />
+      									</cursor>
+      								</MediaView>
+                           </children>
+                        </StackPane>
 								<Label fx:id="currentSubtitle" alignment="CENTER" blendMode="DIFFERENCE" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 									<font>
 										<Font name="System Bold" size="25.0" />
