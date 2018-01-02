@@ -1,0 +1,37 @@
+.root {
+	-fx-accent: #33B83A;
+	-fx-focus-color: #2EA634;
+	
+	-fx-hover-base: -fx-accent;
+	-fx-selection-bar: -fx-accent;
+	
+	-fx-inner-border: -fx-base;
+	-fx-inner-border-horizontal: -fx-base;
+}
+
+.menu-bar {
+	-fx-background-color: -fx-base;
+}
+.menu-item {
+	-fx-padding: 0.2em 0.1em 0.2em 0.1em;
+}
+
+.scroll-bar {
+	-fx-background-color: -fx-base;
+}
+.scroll-bar > .thumb {
+	-fx-background-color: derive(-fx-accent, 30%);
+}
+
+.subtitle {
+	-fx-background-color: #E3E3E3; /* fuck e3 */
+	
+	-fx-border-color: #C9C9C9;
+	-fx-border-style: solid;
+	-fx-border-width: 0px 1px 0px 1px;
+	
+	-fx-padding: 2px;
+}
+.subtitle.chosen {
+	-fx-background-color: #B6E3B8;
+}
