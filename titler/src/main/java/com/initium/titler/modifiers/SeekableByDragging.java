@@ -1,8 +1,8 @@
 package com.initium.titler.modifiers;
 
+import com.initium.titler.TitlerCont;
+
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
 /**
@@ -14,13 +14,13 @@ public class SeekableByDragging {
 
 	private double startX;
 
-	private MediaView view;
+	private TitlerCont titlerCont;
 
-	public SeekableByDragging(MediaView view) {
-		this.view = view;
+	public SeekableByDragging(TitlerCont cont) {
+		this.titlerCont = cont;
 
-		this.view.addEventHandler(MouseEvent.MOUSE_PRESSED, this::startMaybeDrag);
-		this.view.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::drag);
+		titlerCont.imageView.addEventHandler(MouseEvent.MOUSE_PRESSED, this::startMaybeDrag);
+		titlerCont.imageView.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::drag);
 	}
 
 	private void startMaybeDrag(MouseEvent e) {
@@ -28,12 +28,8 @@ public class SeekableByDragging {
 	}
 
 	private void drag(MouseEvent e) {
-		MediaPlayer player = this.view.getMediaPlayer();
-		if (player == null)
-			return;
-
-		Duration goTo = player.getCurrentTime().subtract(Duration.seconds((e.getX() - startX) / 8));
-		player.seek(goTo);
+		Duration goTo = titlerCont.player.audio.getCurrentTime().subtract(Duration.seconds((e.getX() - startX) / 8));
+		titlerCont.player.seekDur(goTo);
 
 		e.consume();
 	}

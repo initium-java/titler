@@ -26,7 +26,7 @@ public class Seekbar extends Rectangle implements Closeable {
 		setWidth(2);
 		heightProperty().bind(this.titlercont.timelinePane.heightProperty());
 
-		this.titlercont.mediaPlayer.currentTimeProperty().addListener((ob, ol, ne) -> {
+		this.titlercont.player.audio.currentTimeProperty().addListener((ob, ol, ne) -> {
 			gotoX = ne.toSeconds() / titlercont.timeline.zoom;
 		});
 		

@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.initium.titler.model.Player;
 import com.initium.titler.modifiers.CurrentSubtitleUpdator;
 import com.initium.titler.modifiers.SeekableByDragging;
 
@@ -15,12 +16,10 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
-import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -44,9 +43,8 @@ public class TitlerCont implements Initializable {
 	public Label currentSubtitle;
 
 	@FXML
-	public MediaView mediaView;
-	public MediaPlayer mediaPlayer;
-	public Media media;
+	public ImageView imageView;
+	public Player player;
 
 	public Timeline timeline;
 	public Seekbar seekbar;
@@ -59,10 +57,10 @@ public class TitlerCont implements Initializable {
 			if (ke.getCode() == KeyCode.SPACE) {
 				ke.consume();
 
-				if (mediaPlayer.getStatus() != Status.PLAYING)
-					mediaPlayer.play();
+				if (player.audio.getStatus() != Status.PLAYING)
+					player.start();
 				else
-					mediaPlayer.pause();
+					player.stop();
 			}
 		});
 
@@ -72,9 +70,9 @@ public class TitlerCont implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		mediaView.fitWidthProperty().bind(mediaViewPane.widthProperty());
-		mediaView.fitHeightProperty().bind(mediaViewPane.heightProperty());
-		new SeekableByDragging(mediaView);
+		imageView.fitWidthProperty().bind(mediaViewPane.widthProperty());
+		imageView.fitHeightProperty().bind(mediaViewPane.heightProperty());
+		new SeekableByDragging(this);
 
 		timeline = new Timeline();
 
@@ -86,10 +84,8 @@ public class TitlerCont implements Initializable {
 		File mediaFile = mediaChooser.showOpenDialog(stage);
 
 		if (mediaFile != null) {
-			media = new Media(mediaFile.toURI().toString());
-			mediaPlayer = new MediaPlayer(media);
-			mediaView.setMediaPlayer(mediaPlayer);
-			new CurrentSubtitleUpdator(mediaPlayer, currentSubtitle, timeline.subtitles);
+			player = new Player(imageView, mediaFile);
+			new CurrentSubtitleUpdator(player.audio, currentSubtitle, timeline.subtitles);
 
 			if (seekbar != null)
 				seekbar.close();
